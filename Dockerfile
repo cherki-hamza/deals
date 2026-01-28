@@ -1,21 +1,14 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.2-apache
 
-# Install system deps
-RUN apk add --no-cache \
-    nginx \
-    bash \
-    curl \
-    zip \
-    unzip \
-    libpng-dev \
-    oniguruma-dev \
-    icu-dev \
-    libzip-dev
+# Enable Apache rewrite
+RUN a2enmod rewrite
 
-# PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring intl zip gd
+# System deps
+RUN apt-get update && apt-get install -y \
+    git unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
+    && docker-php-ext-install pdo_mysql mbstring zip gd
 
-# Install Composer
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
@@ -24,14 +17,12 @@ WORKDIR /var/www/html
 COPY . .
 
 # Install dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Laravel permissions
+# Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Nginx config
-COPY docker/nginx.conf /etc/nginx/nginx.conf
+# Apache → Laravel public folder
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
-
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
