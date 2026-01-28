@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+/* Custom Theme Variables */
+@theme {
+    --color-amber-accent-50: #FFFBEB;
+    --color-amber-accent-100: #FEF3C7;
+    --color-amber-accent-200: #FDE68A;
+    --color-amber-accent-300: #FCD34D;
+    --color-amber-accent-400: #FBBF24;
+    --color-amber-accent-500: #F59E0B;
+    --color-amber-accent-600: #D97706;
+    --color-amber-accent-700: #B45309;
+    --color-amber-accent-800: #92400E;
+    --color-amber-accent-900: #78350F;
+
+    --color-off-white: #FAFAFA;
+    --color-cream: #F8F7F4;
+
+    --color-warm-gray-50: #FAFAF9;
+    --color-warm-gray-100: #F5F5F4;
+    --color-warm-gray-200: #E7E5E4;
+    --color-warm-gray-300: #D6D3D1;
+    --color-warm-gray-400: #A8A29E;
+    --color-warm-gray-500: #78716C;
+    --color-warm-gray-600: #57534E;
+    --color-warm-gray-700: #44403C;
+    --color-warm-gray-800: #292524;
+    --color-warm-gray-900: #1C1917;
+
+    --font-family-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-family-heading: 'DM Sans', 'Inter', system-ui, sans-serif;
+
+    --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+    --shadow-soft-lg: 0 10px 40px -10px rgba(0, 0, 0, 0.1), 0 2px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-card-hover: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 5px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+/* Base Layer Customizations */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: var(--color-off-white);
+        color: var(--color-warm-gray-800);
+        font-family: var(--font-family-sans);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-family-heading);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+    }
+
+    a {
+        transition: color 0.2s;
+    }
+}
+
+/* Component Layer */
+@layer components {
+
+    /* Container */
+    .container-main {
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+        .container-main {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .container-main {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+
+    /* Button Styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        border-radius: 0.75rem;
+        transition: all 0.2s;
+    }
+
+    .btn-primary {
+        background-color: var(--color-amber-accent-500);
+        color: white;
+        box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--color-amber-accent-600);
+        box-shadow: var(--shadow-soft-lg);
+    }
+
+    .btn-secondary {
+        background-color: white;
+        color: var(--color-warm-gray-700);
+        border: 1px solid var(--color-warm-gray-200);
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--color-warm-gray-50);
+        border-color: var(--color-warm-gray-300);
+    }
+
+    .btn-amazon {
+        background: linear-gradient(to right, var(--color-amber-accent-400), var(--color-amber-accent-500));
+        color: white;
+        font-weight: 600;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-soft);
+        transition: all 0.2s;
+    }
+
+    .btn-amazon:hover {
+        background: linear-gradient(to right, var(--color-amber-accent-500), var(--color-amber-accent-600));
+        box-shadow: var(--shadow-soft-lg);
+        transform: translateY(-2px);
+    }
+
+    /* Card Styles */
+    .card {
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-card);
+        transition: all 0.3s;
+    }
+
+    .card-hover:hover {
+        box-shadow: var(--shadow-card-hover);
+        transform: translateY(-4px);
+    }
+
+    /* Product Card */
+    .product-card {
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-card);
+        transition: all 0.3s;
+        overflow: hidden;
+    }
+
+    .product-card:hover {
+        box-shadow: var(--shadow-card-hover);
+        transform: translateY(-4px);
+    }
+
+    .product-card-body {
+        padding: 1.25rem;
+    }
+
+    /* Category Card */
+    .category-card {
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-card);
+        transition: all 0.3s;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .category-card:hover {
+        box-shadow: var(--shadow-card-hover);
+        transform: translateY(-4px);
+    }
+
+    /* Deal Banner */
+    .deal-banner {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1.5rem;
+        background: linear-gradient(to right, var(--color-amber-accent-100), var(--color-amber-accent-50));
+    }
+
+    /* Section Styles */
+    .section {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    @media (min-width: 1024px) {
+        .section {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+    }
+
+    .section-heading {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: var(--color-warm-gray-900);
+        margin-bottom: 1rem;
+    }
+
+    @media (min-width: 1024px) {
+        .section-heading {
+            font-size: 2.25rem;
+        }
+    }
+
+    .section-subheading {
+        font-size: 1.125rem;
+        color: var(--color-warm-gray-500);
+        max-width: 42rem;
+    }
+
+    /* Badge Styles */
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .badge-featured {
+        background-color: var(--color-amber-accent-100);
+        color: var(--color-amber-accent-700);
+    }
+
+    .badge-deal {
+        background-color: #FEE2E2;
+        color: #B91C1C;
+    }
+
+    /* Trust Badge */
+    .trust-badge {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--color-warm-gray-500);
+        font-size: 0.875rem;
+    }
+
+    /* Price Display */
+    .price-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-warm-gray-900);
+    }
+
+    .price-discount {
+        font-size: 0.875rem;
+        color: #DC2626;
+        font-weight: 500;
+    }
+
+    /* Navigation */
+    .nav-link {
+        color: var(--color-warm-gray-600);
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+        color: var(--color-warm-gray-900);
+    }
+
+    .nav-link-active {
+        color: var(--color-amber-accent-600);
+    }
+}
+
+/* Utility Layer */
+@layer utilities {
+
+    /* Text Gradient */
+    .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(to right, var(--color-amber-accent-500), var(--color-amber-accent-600));
+    }
+
+    /* Aspect Ratios */
+    .aspect-product {
+        aspect-ratio: 4/5;
+    }
+
+    /* Line Clamp */
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Skeleton Loading */
+    .skeleton {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        background-color: var(--color-warm-gray-200);
+        border-radius: 0.25rem;
+    }
+
+    @keyframes pulse {
+        50% {
+            opacity: .5;
+        }
+    }
+
+    /* Subtle Bounce */
+    .animate-bounce-subtle {
+        animation: bounce-subtle 3s infinite;
+    }
+
+    @keyframes bounce-subtle {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+}
