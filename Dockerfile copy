@@ -5,8 +5,7 @@ RUN a2enmod rewrite
 
 # System deps
 RUN apt-get update && apt-get install -y \
-    git unzip curl nodejs npm \
-    libpng-dev libonig-dev libxml2-dev libzip-dev \
+    git unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
     && docker-php-ext-install pdo_mysql mbstring zip gd
 
 # Composer
@@ -17,16 +16,13 @@ WORKDIR /var/www/html
 # Copy project
 COPY . .
 
-# Install PHP deps
+# Install dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Build Vite assets
-RUN npm install && npm run build
-
 # Permissions
-RUN chown -R www-data:www-data storage bootstrap/cache public
+RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Apache → public folder
+# Apache → Laravel public folder
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
